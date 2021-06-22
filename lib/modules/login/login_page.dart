@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:payflow/modules/widget/social_login/social_login_button.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_images.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
@@ -14,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Container(
@@ -21,11 +23,13 @@ class _LoginPageState extends State<LoginPage> {
         height: size.height,
         child: Stack(
           children: [
+            // ***** Orange Container *****
             Container(
               width: size.width,
               height: size.height * 0.39,
               color: AppColors.primary,
             ),
+            // ***** Person Image *****
             Positioned(
               top: size.height * 0.082,
               left: 0,
@@ -36,8 +40,9 @@ class _LoginPageState extends State<LoginPage> {
                 height: size.height * 0.46,
               ),
             ),
+            // ***** Code Bar and Text *****
             Positioned(
-              bottom: size.height * 0.21,
+              bottom: size.height * 0.10,
               left: 0,
               right: 0,
               child: Column(
@@ -56,6 +61,16 @@ class _LoginPageState extends State<LoginPage> {
                       "Organize seus boletos em um só lugar",
                       textAlign: TextAlign.center,
                       style: TextStyles.titleHome,
+                    ),
+                  ),
+                  //***** Social Login Button *****
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 40, left: 40, right: 40),
+                    child: SocialLoginButton(
+                      onTap: () {
+                        print("clicou");
+                      },
                     ),
                   ),
                 ],
