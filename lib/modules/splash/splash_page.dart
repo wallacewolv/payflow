@@ -7,17 +7,30 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: Stack(
-        children: [
-          Center(
-            child: Image.asset(AppImages.union),
-          ),
-          Center(
-            child: Image.asset(AppImages.logoFull),
-          ),
-        ],
+      body: Container(
+        width: size.width,
+        height: size.height,
+        child: Stack(
+          children: [
+            Center(
+              child: Image.asset(
+                AppImages.union,
+                width: size.width * 0.64,
+                height: size.height * 0.46,
+              ),
+            ),
+            Center(
+              child: Image.asset(
+                AppImages.logoFull,
+                width: size.width * 0.43,
+                height: size.height * 0.17,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
