@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:payflow/shared/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController {
   var _isAuthenticated = false;
-  var _user;
+  UserModel? _user;
 
-  get user => _user;
+  UserModel get user =>
+      _user!; // _user! garante que só vai logar se o usuário não estiver nulo
 
-  void setUser(BuildContext context, var user) {
+  //***** Validação de login do usuário *****
+  void setUser(BuildContext context, UserModel? user) {
     if (user != null) {
       _user = user;
       _isAuthenticated = true;
@@ -16,5 +20,17 @@ class AuthController {
       _isAuthenticated = false;
       Navigator.pushReplacementNamed(context, "/login");
     }
+  }
+
+  Future<void> saveUser(UserModel user) async {
+    final instance = await SharedPreferences.getInstance();
+    await instance.setString("user", user.toJson());
+  }
+
+  Future<void> currentUser(BuildContext context) async {
+    final instance = await SharedPreferences.getInstance();
+    final json = instance.get("user") as String;
+    setUser(context, UserModel.fromJson(json));
+    return;
   }
 }
