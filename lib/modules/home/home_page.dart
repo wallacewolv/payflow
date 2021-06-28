@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:payflow/modules/home/home_controller.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
 import 'package:payflow/shared/themes/app_text_styles.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final controller = HomeController();
+  final pages = [
+    Container(
+      color: Colors.red,
+    ),
+    Container(
+      color: Colors.blue,
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +58,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      body: pages[controller.currentPage],
       bottomNavigationBar: Container(
         height: 90,
         child: Row(
@@ -50,7 +66,8 @@ class HomePage extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () {
-                  print("Clicou botão da esquerda");
+                  controller.setPage(0);
+                  setState(() {});
                 },
                 icon: Icon(
                   Icons.home,
@@ -58,7 +75,7 @@ class HomePage extends StatelessWidget {
                 )),
             GestureDetector(
               onTap: () {
-                print("Clicou botão central");
+                print("clicou");
               },
               child: Container(
                 height: 56,
@@ -75,19 +92,14 @@ class HomePage extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {
-                  print("Clicou botão da direita");
+                  controller.setPage(1);
+                  setState(() {});
                 },
                 icon: Icon(
                   Icons.description_outlined,
                   color: AppColors.body,
                 ))
           ],
-        ),
-      ),
-      body: Center(
-        child: Text(
-          "Home Page",
-          style: TextStyle(fontSize: 30),
         ),
       ),
     );
